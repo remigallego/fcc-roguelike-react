@@ -34,23 +34,23 @@ class Game extends Component {
   movePlayer(e) {
     e.preventDefault();
     console.log("Key Down: " + e.key);
-    if(e.key === 'i')
+    if(e.key === 'i' )
     {
         this.props.updatePlayer('INIT', this.props.mapReducer)
     }
-    else if(e.key === 'z')
+    else if(e.key === 'z' || e.key == "ArrowUp")
       {
         this.props.updatePlayer('UP', this.props.mapReducer)
       }
-    else if(e.key === 's')
+    else if(e.key === 's' || e.key == "ArrowDown")
         {
           this.props.updatePlayer('DOWN', this.props.mapReducer)
         }
-        else if(e.key === 'd')
+        else if(e.key === 'd' || e.key == "ArrowRight")
             {
               this.props.updatePlayer('RIGHT', this.props.mapReducer)
             }
-            else if(e.key === 'q')
+            else if(e.key === 'q' || e.key == "ArrowLeft")
                 {
                   this.props.updatePlayer('LEFT', this.props.mapReducer)
                 }
