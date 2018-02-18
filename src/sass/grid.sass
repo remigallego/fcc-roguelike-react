@@ -1,0 +1,24 @@
+$width: 500px
+$height: 500px
+$blocks: 50
+
+.grid
+  display: grid
+  width: $width
+  height: $height
+  border: 1px solid red
+  box-sizing: content-box
+  margin: 0 auto
+  grid-template-columns: repeat($blocks, 1fr)
+  grid-template-rows: repeat($blocks, 1fr)
+  user-select: none
+  -ms-user-select: none
+
+.box
+  overflow: hidden
+
+.empty
+  background-color: rgba(30, 30, 200, 0.2)
+
+.wall
+  background-color: rgba(160, 90, 10, 0.6)
