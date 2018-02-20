@@ -1,14 +1,17 @@
-$width: 500px
-$height: 500px
-$blocks: 50
+$width: 600px
+$height: 600px
+$blocks: 60
 
-.grid
+.map
   display: grid
   width: $width
   height: $height
-  border: 1px solid red
-  box-sizing: content-box
   margin: 0 auto
+  margin-top: 50px
+  margin-bottom: 50px
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+  box-sizing: content-box
+
   grid-template-columns: repeat($blocks, 1fr)
   grid-template-rows: repeat($blocks, 1fr)
   user-select: none
@@ -16,9 +19,17 @@ $blocks: 50
 
 .box
   overflow: hidden
+  font-size: 70%
+  border: 1px solid rgba(200, 200, 200, 1/70)
 
 .empty
-  background-color: rgba(30, 30, 200, 0.2)
+  background-color: #e0e9e5
 
 .wall
-  background-color: rgba(160, 90, 10, 0.6)
+  background-color: #242824
+
+.player
+  background-color: yellow
+
+.enemy
+  background-color: red

@@ -1,0 +1,11 @@
+.player-stats {
+  width: 150px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #f0f9e6; }
+  .player-stats p {
+    margin: 0px;
+    padding: 0px; }
+  .player-stats h3 {
+    margin-top: 10px;
+    margin-bottom: 5px; }

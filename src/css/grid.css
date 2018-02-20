@@ -1,0 +1,30 @@
+.map {
+  display: grid;
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+  box-sizing: content-box;
+  grid-template-columns: repeat(60, 1fr);
+  grid-template-rows: repeat(60, 1fr);
+  user-select: none;
+  -ms-user-select: none; }
+
+.box {
+  overflow: hidden;
+  font-size: 70%;
+  border: 1px solid rgba(200, 200, 200, 0.0142857); }
+
+.empty {
+  background-color: #e0e9e5; }
+
+.wall {
+  background-color: #242824; }
+
+.player {
+  background-color: yellow; }
+
+.enemy {
+  background-color: red; }

@@ -1,25 +1,27 @@
 export const UPDATE_PLAYER_POSITION = 'UPDATE_PLAYER_POSITION'
 
-export default (dir, mapReducer) => {
+export default (settings, mapReducer) => {
   return  {
         type: UPDATE_PLAYER_POSITION,
-        payload: updatePlayer(dir, mapReducer)
+        payload: updatePlayer(settings, mapReducer)
           }
 }
 
-function updatePlayer(dir, mapReducer) {
+/* */
+function updatePlayer(settings, mapReducer) {
+    let command = settings.command;
     let gameMap = mapReducer.gameMap;
     let X = mapReducer.player.x;
     let Y = mapReducer.player.y;
 
-    if(dir === 'INIT') {
+    if(command === 'update_player_init') {
+      X = settings.x;
+      Y = settings.y;
       gameMap[Y][X] = 2;
       return {gameMap: gameMap, player: {x: X, y: Y}}
     }
 
-
-
-    if(dir === 'UP' && Y > 0)
+    if(command === 'update_player_up' && Y > 0)
     {
       if(gameMap[Y-1][X] === 0)
       {
@@ -27,12 +29,11 @@ function updatePlayer(dir, mapReducer) {
         gameMap[Y-1][X] = 2;
         return {gameMap: gameMap, player: {x: X, y: Y-1}}
       }
-      else {
+      else
         return {gameMap: gameMap, player: {x: X, y: Y}}
-      }
     }
 
-    if(dir === 'DOWN' && Y < 50)
+    if(command === 'update_player_down' && Y < 50)
     {
       if(gameMap[Y+1][X] === 0)
       {
@@ -40,12 +41,11 @@ function updatePlayer(dir, mapReducer) {
         gameMap[Y+1][X] = 2;
         return {gameMap: gameMap, player: {x: X, y: Y+1}}
       }
-      else {
+      else
         return {gameMap: gameMap, player: {x: X, y: Y}}
-      }
     }
 
-    if(dir === 'LEFT' && X > 0)
+    if(command === 'update_player_left' && X > 0)
     {
       if(gameMap[Y][X-1] === 0)
       {
@@ -53,12 +53,11 @@ function updatePlayer(dir, mapReducer) {
         gameMap[Y][X-1] = 2;
         return {gameMap: gameMap, player: {x: X-1, y: Y}}
       }
-      else {
+      else
         return {gameMap: gameMap, player: {x: X, y: Y}}
-      }
     }
 
-    if(dir === 'RIGHT' && X < 50)
+    if(command === 'update_player_right' && X < 50)
     {
       if(gameMap[Y][X+1] === 0)
       {
@@ -66,11 +65,7 @@ function updatePlayer(dir, mapReducer) {
         gameMap[Y][X+1] = 2;
         return {gameMap: gameMap, player: {x: X+1, y: Y}}
       }
-      else {
+      else
         return {gameMap: gameMap, player: {x: X, y: Y}}
-      }
     }
-
-
-
 }

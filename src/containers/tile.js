@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
+import '../css/grid.css'
+
 
 class Tile extends Component {
-render() {
-  console.log("Render Tile Class");
-  let type = "box " + this.props.type;
-  return(
-    <div className={type}  position={this.props.pos} />
-  )
-}
-}
+  constructor() {
+    super()
+    this.type = ""
+  }
 
+
+  render() {
+    return(
+      <div className={this.props.className} ></div>
+    )
+
+    }
+}
 
 export default Tile;
