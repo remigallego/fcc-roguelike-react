@@ -3,12 +3,6 @@ import {connect} from 'react-redux'
 import '../css/infos.css'
 
 class Infos extends Component {
-  constructor()
-  {
-    super()
-  }
-
-
   render() {
     return(
       <div>

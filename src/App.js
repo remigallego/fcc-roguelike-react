@@ -3,11 +3,12 @@ import './css/app.css';
 
 import Game from './containers/game.js'
 import Infos from './containers/infos.jsx'
-import {createStore, combineReducers} from 'redux'
 import {connect} from 'react-redux'
 import updatePlayerAction from './actions/updatePlayerPosition'
 import generateMapAction from './actions/generateMap'
 import generateMapDebug from './actions/generateMap'
+import bonusAction from './actions/bonus.js'
+import enemyAction from './actions/enemy.js'
 
 class App extends Component {
   constructor() {
@@ -17,19 +18,41 @@ class App extends Component {
   }
 
   movePlayer(e) {
+    let X = this.props.mapReducer.player.x;
+    let Y = this.props.mapReducer.player.y;
+    let gameMap = this.props.mapReducer.gameMap;
     e.preventDefault();
-    if(     e.key === 'z' || e.key == "ArrowUp")
-    this.props.updatePlayer({command: 'update_player_up'}, this.props.mapReducer)
-    else if(e.key === 's' || e.key == "ArrowDown")
-    this.props.updatePlayer({command: 'update_player_down'}, this.props.mapReducer)
-    else if(e.key === 'd' || e.key == "ArrowRight")
-    this.props.updatePlayer({command: 'update_player_right'}, this.props.mapReducer)
-    else if(e.key === 'q' || e.key == "ArrowLeft")
-    this.props.updatePlayer({command: 'update_player_left'}, this.props.mapReducer)
+    if(     e.key === 'z' || e.key === "ArrowUp")
+    {
+        // If Bonus
+        if(gameMap[Y-1][X] === 4)
+        this.props.handleBonus()
+
+        // If Enemy
+        if(gameMap[Y-1][X] === 3)
+        this.props.handleEnemy(this.props.mapReducer.level, [X,Y-1], this.props.mapReducer.enemyList);
+
+      // Else
+      this.props.updatePlayerPosition({command: 'update_player_up'}, this.props.mapReducer)
+    }
+    else if(e.key === 's' || e.key === "ArrowDown")
+    {
+
+        if(gameMap[Y+1][X] === 4)
+        this.props.handleBonus()
+      this.props.updatePlayerPosition({command: 'update_player_down'}, this.props.mapReducer)}
+    else if(e.key === 'd' || e.key === "ArrowRight")
+    {   if(gameMap[Y][X+1] === 4)
+        this.props.handleBonus()
+      this.props.updatePlayerPosition({command: 'update_player_right'}, this.props.mapReducer)}
+    else if(e.key === 'q' || e.key === "ArrowLeft")
+    {   if(gameMap[Y][X-1] === 4)
+        this.props.handleBonus()
+      this.props.updatePlayerPosition({command: 'update_player_left'}, this.props.mapReducer)}
   }
 
   spawnPlayer() {
-    this.props.updatePlayer({command: 'update_player_init', x: 30, y: 10}, this.props.mapReducer)
+    this.props.updatePlayerPosition({command: 'update_player_init', x: 30, y: 10}, this.props.mapReducer)
   }
 
   render() {
@@ -55,12 +78,22 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updatePlayer: (settings, map) => {
+    updatePlayerPosition: (settings, map) => {
       dispatch(updatePlayerAction(settings, map))
     },
     generateMap:  (w, h) => {
       dispatch(generateMapAction(w, h));
-    }
+    },
+    handleBonus: () => {
+      dispatch(
+        bonusAction()
+      );
+    },
+    handleEnemy: (lvl, pos, enemyList) => {
+      dispatch(
+        enemyAction(lvl, pos, enemyList)
+      );
+    },
   }
 };
 
