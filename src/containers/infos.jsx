@@ -13,7 +13,7 @@ class Infos extends Component {
         <div className="player-stats">
           <h3>Player Stats</h3>
           <p>Level:{this.props.player.level}</p>
-          <p>Life: {this.props.player.life}</p>
+          <p>HP: {this.props.player.life}</p>
           <p>Attack: {this.props.player.attack}</p>
           <p>XP: {this.props.player.xp}</p>
         </div>

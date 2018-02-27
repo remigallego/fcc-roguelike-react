@@ -48,7 +48,7 @@ export default function attackEnemy(state, payload) {
     {
       copyGM[Ye][Xe] = 0;
       let playerXP = state.player.xp;
-      playerXP += mapLvl*10;
+      playerXP += mapLvl*3;
 
       if(isPlayerNewLevel(playerXP, playerLvl))
       {
@@ -65,8 +65,9 @@ export default function attackEnemy(state, payload) {
         playerXP += 50;
         playerLife += 100;
         mapLvl++;
+        newlog += `The boss dies!`
       }
-
+  
       return {...state, level: mapLvl, nextLevel: nxt, gameMap: copyGM, enemyList: arr,
         player: {...state.player, xp: playerXP, level: playerLvl, life: playerLife, attack: attack}};
     }

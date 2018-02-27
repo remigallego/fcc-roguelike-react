@@ -16,12 +16,13 @@ class Game extends Component {
     if(gameMap !== null)
     {
       let player = this.props.mapReducer.player;
-      return gameMap.map((array, x)=>{
-        return array.map((tile, y) => {
+      return gameMap.map((array, y)=>{
+        return array.map((tile, x) => {
           let id = x + "_" + y;
           let isVisible = false
 
-          if(y <= player.x + 5 && y >= player.x- 5 && x <= player.y + 5 && x >= player.y - 5 )
+          if(y <= player.y + 5 && y >= player.y- 5 && x <= player.x + 5 && x >= player.x - 5)
+            if(!((y >= player.y + 4 || y <= player.y - 4) && (x <= player.x - 4 || x >= player.x + 4)))
             isVisible = true;
 
           switch(tile)
