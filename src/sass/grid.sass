@@ -2,6 +2,7 @@ $width: 600px
 $height: 600px
 $blocks: 60
 
+
 .map
   display: grid
   width: $width
@@ -17,13 +18,11 @@ $blocks: 60
   user-select: none
   -ms-user-select: none
 
-.box
-  overflow: hidden
-  font-size: 70%
-  border: 1px solid rgba(200, 200, 200, 1/70)
+
 
 .empty
   background-color: #e0e9e5
+
 
 .wall
   background-color: #242824
@@ -32,7 +31,20 @@ $blocks: 60
   background-color: yellow
 
 .enemy
-  background-color: red
+  background-color: rgba(200, 100, 100, 1)
 
 .bonus
-  background-color: green 
+  background-color: green
+
+.boss
+  background-color: rgba(240, 0, 100, 1)
+  border: 1px solid black
+
+.box
+  overflow: hidden
+  border: 1px solid rgba(200, 200, 200, 1/70)
+
+.false
+  background-color: black
+
+.seen

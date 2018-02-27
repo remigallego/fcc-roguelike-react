@@ -1,62 +1,49 @@
 import generateMap from '../functions/generateMap.js'
 import updatePlayer from '../functions/updatePlayer.js'
+import attackEnemy from '../functions/attackEnemy.js'
 
-  export default (state =
-    {
-      gameMap: null,
-      level: 1,
-      player: {x: 30, y: 10},
-      enemyList : []
-    }, action) => {
+
+const initialState = {
+  gameMap: null,
+  level: 1,
+  nextLevel: false,
+  player: {
+    life: 100,
+    attack: 1,
+    level: 1,
+    xp: 0,
+    x: 30,
+    y: 10
+  },
+  enemyList : [],
+  log: ["Boss!", "The", "Beat"]
+};
+
+export default (state = initialState,action) => {
   switch(action.type)
   {
-    case 'INIT_TEST_MAP'         :     return {...state, gameMap: action.payload.gameMap}
-    case 'ATTACK_ENEMY'          :
-    {
-
-      return attackEnemy(state, action.payload);
+    case 'BONUS':
+    { let newHealth = state.player.life + 10*state.level
+      return {...state, player: {...state.player, life: newHealth}}
     }
+    case 'ATTACK_ENEMY'          : return attackEnemy(state, action.payload);
+    case 'ENEMY_DEAD_ZERO'       : return {...state, enemyDead: false}
     case 'GENERATE_MAP'          :
     {
       let gen = generateMap(action.payload.w, action.payload.h);
       return {...state,
+      nextLevel: false,
       gameMap: gen.gameMap,
-      enemyList: gen.enemyList
+      enemyList: gen.enemyList,
       }
     }
-    case 'UPDATE_PLAYER_POSITION' :    return {...state,
-      player: updatePlayer(action.payload.settings, state).player
+    case 'UPDATE_PLAYER_POSITION' : {
+      let newPlayerPos = updatePlayer(action.payload.settings, state).player;
+      let newX = newPlayerPos.x;
+      let newY = newPlayerPos.y;
+      return {...state,
+      player: {...state.player, x: newX, y: newY}}
     }
-    default:                           return state// something
+    default:     return state// something
   }
-}
-
-function attackEnemy(state, payload) {
-  let e;
-  let arr = state.enemyList;
-  let lvl = state.level
-
-  for(let i = 0; i < arr.length ; i++)
-  {
-    if(arr[i].pos.toString() === payload.pos.toString())
-      {e = i;}
-  }
-
-  if(e != undefined)
-  {
-    let newLife = arr[e].life - 50;
-    let Xe = arr[e].pos[0];
-    let Ye = arr[e].pos[1];
-
-    arr[e] = { pos: arr[e].pos, life: newLife }
-
-    let copyGM = state.gameMap;
-
-    if(newLife <= 0)
-    {
-      copyGM[Ye][Xe] = 0;
-      return {...state, gameMap: copyGM, enemyList: arr};
-    }
-  }
-  return {...state, enemyList: arr};
 }

@@ -12,11 +12,6 @@
   user-select: none;
   -ms-user-select: none; }
 
-.box {
-  overflow: hidden;
-  font-size: 70%;
-  border: 1px solid rgba(200, 200, 200, 0.0142857); }
-
 .empty {
   background-color: #e0e9e5; }
 
@@ -27,7 +22,18 @@
   background-color: yellow; }
 
 .enemy {
-  background-color: red; }
+  background-color: #c86464; }
 
 .bonus {
   background-color: green; }
+
+.boss {
+  background-color: #f00064;
+  border: 1px solid black; }
+
+.box {
+  overflow: hidden;
+  border: 1px solid rgba(200, 200, 200, 0.0142857); }
+
+.false {
+  background-color: black; }

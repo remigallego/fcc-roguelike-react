@@ -1,5 +1,6 @@
 .player-stats {
-  width: 150px;
+  font-size: 30px;
+  width: 300px;
   margin: 0 auto;
   text-align: center;
   background-color: #f0f9e6; }
@@ -7,5 +8,17 @@
     margin: 0px;
     padding: 0px; }
   .player-stats h3 {
+    margin-top: 10px;
+    margin-bottom: 5px; }
+
+.level-stats {
+  width: 150px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #a0fee1; }
+  .level-stats p {
+    margin: 0px;
+    padding: 0px; }
+  .level-stats h3 {
     margin-top: 10px;
     margin-bottom: 5px; }

@@ -1,3 +1,15 @@
 .buttons {
   margin: 0 auto;
   width: 80px; }
+
+.gamelog {
+  text-align: center;
+  font-size: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+p {
+  margin: 0; }
+
+h3 {
+  margin: 0; }
