@@ -14,6 +14,7 @@
 .level-stats {
   width: 150px;
   margin: 0 auto;
+  margin-top: 20px;
   text-align: center;
   background-color: #a0fee1; }
   .level-stats p {

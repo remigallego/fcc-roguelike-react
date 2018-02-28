@@ -10,9 +10,9 @@
   height: 600px;
   margin: 0 auto;
   margin-top: 50px;
-  margin-bottom: 50px;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
   box-sizing: content-box;
+  justify-content: center;
   grid-template-columns: repeat(60, 1fr);
   grid-template-rows: repeat(60, 1fr);
   user-select: none;
