@@ -1,4 +1,4 @@
-const bonusMax = 3;
+const bonusMax = 6;
 const enemyMax = 5;
 const blocks = 60
 

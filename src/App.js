@@ -17,8 +17,11 @@ class App extends Component {
     this.movePlayer = this.movePlayer.bind(this);
     this.spawnPlayer = this.spawnPlayer.bind(this)
     this.startGame = this.startGame.bind(this);
+
+
     this.log = [];
   }
+
 
   movePlayer(e) {
     let X = this.props.mapReducer.player.x;
@@ -32,7 +35,9 @@ class App extends Component {
     this.props.handleBonus()
     // If Enemy
     if(gameMap[Y-1][X] === 3 || gameMap[Y-1][X] === 5)
-    this.props.handleEnemy([X,Y-1]);
+    {this.props.handleEnemy([X,Y-1]);
+     }
+
     // Else
     this.props.updatePlayerPosition({command: 'update_player_up'}, this.props.mapReducer)
     }
@@ -69,7 +74,6 @@ class App extends Component {
     // Else
     this.props.updatePlayerPosition({command: 'update_player_left'}, this.props.mapReducer)
     }
-
   }
 
   spawnPlayer() {
@@ -77,6 +81,7 @@ class App extends Component {
   }
 
   startGame(lvl) {
+    console.log("StartGame in App")
     this.props.generateMap(60,60,lvl)
     this.props.updatePlayerPosition({command: 'update_player_init', x: 30, y: 10}, this.props.mapReducer)
   }
@@ -93,16 +98,16 @@ class App extends Component {
         alert("Congratulations, you beat the Boss! Stage: " + this.props.mapReducer.level)
       }
       }
-    if(this.props.mapReducer.playerLife <= 0)
+    if(this.props.mapReducer.player.life <= 0)
       {
         alert("You are dead. Start again from Stage 1.");
-        this.startGame(0)
+        this.startGame(1)
       }
 
     return (
       <div className="App" tabIndex="0" onKeyDown={this.movePlayer}>
         <Game />
-        <GameLog props={this.props.mapReducer.log}/>
+        <GameLog />
         <div className="buttons">
           <button onClick={() => { this.startGame(1) }} >START</button>
         </div>
@@ -123,8 +128,8 @@ const mapDispatchToProps = (dispatch) => {
     updatePlayerPosition: (settings, map) => {
       dispatch(updatePlayerAction(settings, map))
     },
-    generateMap:  (w, h) => {
-      dispatch(generateMapAction(w, h));
+    generateMap:  (w, h, lvl) => {
+      dispatch(generateMapAction(w, h, lvl));
     },
     handleBonus: () => {
       dispatch(

@@ -1,3 +1,9 @@
+@keyframes blink-kf {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 100; } }
+
 .map {
   display: grid;
   width: 600px;
@@ -19,7 +25,10 @@
   background-color: #242824; }
 
 .player {
-  background-color: yellow; }
+  background-color: yellow;
+  animation-duration: 1s;
+  animation-name: blink-kf;
+  animation-iteration-count: infinite; }
 
 .enemy {
   background-color: #c86464; }

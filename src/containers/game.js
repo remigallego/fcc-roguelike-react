@@ -20,7 +20,7 @@ class Game extends Component {
         return array.map((tile, x) => {
           let id = x + "_" + y;
           let isVisible = false
-
+          
           if(y <= player.y + 5 && y >= player.y- 5 && x <= player.x + 5 && x >= player.x - 5)
             if(!((y >= player.y + 4 || y <= player.y - 4) && (x <= player.x - 4 || x >= player.x + 4)))
             isVisible = true;

@@ -2,6 +2,17 @@ $width: 600px
 $height: 600px
 $blocks: 60
 
+@keyframes blink-kf
+  from
+    opacity: 0
+
+  to
+    opacity: 100
+
+@mixin blink-anim
+  animation-duration: 1s
+  animation-name: blink-kf
+  animation-iteration-count: infinite
 
 .map
   display: grid
@@ -18,17 +29,15 @@ $blocks: 60
   user-select: none
   -ms-user-select: none
 
-
-
 .empty
   background-color: #e0e9e5
-
 
 .wall
   background-color: #242824
 
 .player
   background-color: yellow
+  @include blink-anim
 
 .enemy
   background-color: rgba(200, 100, 100, 1)
@@ -47,4 +56,5 @@ $blocks: 60
 .false
   background-color: black
 
-.seen
+.true
+  //background-color: rgba(0, 0, 0, 1)

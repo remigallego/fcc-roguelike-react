@@ -1,7 +1,7 @@
 import generateMap from '../functions/generateMap.js'
 import updatePlayer from '../functions/updatePlayer.js'
 import attackEnemy from '../functions/attackEnemy.js'
-
+import bonusValue from '../functions/bonusValue.js'
 
 const initialState = {
   gameMap: null,
@@ -23,18 +23,31 @@ export default (state = initialState,action) => {
   switch(action.type)
   {
     case 'BONUS':
-    { let newHealth = state.player.life + 10*state.level
-      return {...state, player: {...state.player, life: newHealth}}
+    {
+      let bonusPoints = bonusValue();
+
+      let newHealth = state.player.life + bonusPoints
+      let newlog = `You earn ${bonusPoints} HP!`
+      let log = state.log
+      log.shift(); // Delete first element of the array
+      log.push(newlog);
+      return {...state, log: log, player: {...state.player, life: newHealth}}
     }
     case 'ATTACK_ENEMY'          : return attackEnemy(state, action.payload);
     case 'ENEMY_DEAD_ZERO'       : return {...state, enemyDead: false}
     case 'GENERATE_MAP'          :
     {
-      let gen = generateMap(action.payload.w, action.payload.h);
+      let gen = generateMap(action.payload.w, action.payload.h,action.payload.lvl);
+      let health = state.player.life
+      console.log(action.payload.lvl )
+      if(action.payload.lvl === 1)
+        {health = 100;
+        console.log("hihi")}
       return {...state,
       nextLevel: false,
       gameMap: gen.gameMap,
       enemyList: gen.enemyList,
+      player: {...state.player, life: health}
       }
     }
     case 'UPDATE_PLAYER_POSITION' : {

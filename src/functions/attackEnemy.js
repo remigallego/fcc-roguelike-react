@@ -3,14 +3,16 @@ import isPlayerNewLevel from './isPlayerNewLevel.js'
 
 const DMG_COEFFICIENT = 2
 
-
 export default function attackEnemy(state, payload) {
   let e;
+  let copyGM = state.gameMap;
   let arr = state.enemyList;
   let mapLvl = state.level
   let playerLvl = state.player.level;
   let playerAttack = state.player.attack;
   let playerLife = state.player.life;
+  let playerXP = state.player.xp;
+  let playerNxt = state.nextLevel;
   let log = state.log;
   let newlog = "";
 
@@ -22,11 +24,11 @@ export default function attackEnemy(state, payload) {
 
   if(e != undefined)
   {
-    let dmgEnemy = playerAttack*playerLvl*10
-    dmgEnemy = random(dmgEnemy, dmgEnemy*DMG_COEFFICIENT);
+    let dmgEnemy = playerAttack*5
+    dmgEnemy = random(dmgEnemy, dmgEnemy*2);
     let enemyLife = arr[e].life - dmgEnemy;
 
-    let dmgPlayer = playerLvl*DMG_COEFFICIENT;
+    let dmgPlayer = mapLvl*3;
 
     if(arr[e].type === "boss")
         dmgPlayer = dmgPlayer*2;
@@ -39,40 +41,53 @@ export default function attackEnemy(state, payload) {
 
     arr[e] = {...arr[e], pos: arr[e].pos, life: enemyLife}
 
-    let copyGM = state.gameMap;
-    let attack = playerAttack
-    newlog += `The enemy loses ${dmgEnemy} HP - You lose ${dmgPlayer} HP`
-    log.push(newlog)
+    newlog = `The enemy loses ${dmgEnemy} HP - You lose ${dmgPlayer} HP`
+    if(arr[e].type === "boss") // If Player Killed the Boss
+    {
+      newlog = `The boss loses ${dmgEnemy} HP - You lose ${dmgPlayer} HP`
+    }
 
     if(enemyLife <= 0) // If Enemy Dead
     {
       copyGM[Ye][Xe] = 0;
-      let playerXP = state.player.xp;
-      playerXP += mapLvl*3;
+      let XP = random(mapLvl*5,mapLvl*5+mapLvl)
+      playerXP += XP;
 
-      if(isPlayerNewLevel(playerXP, playerLvl))
-      {
-        playerXP = 0;
-        playerLvl++;
-        attack += 2*playerLvl;
-      }
-      let nxt = state.nextLevel;
+      newlog = `The enemy dies! - You lose ${dmgPlayer} HP and earn ${playerXP} XP`
+
+
+      let bossdead = false
 
       if(arr[e].type === "boss") // If Player Killed the Boss
       {
         console.log("Level 2!");
-        nxt = true;
+        playerNxt = true;
         playerXP += 50;
         playerLife += 100;
         mapLvl++;
-        newlog += `The boss dies!`
+        bossdead = true;
+        newlog = `The boss dies! - Go to Stage ${mapLvl}`
       }
-  
-      return {...state, level: mapLvl, nextLevel: nxt, gameMap: copyGM, enemyList: arr,
-        player: {...state.player, xp: playerXP, level: playerLvl, life: playerLife, attack: attack}};
+
+      if(isPlayerNewLevel(playerXP, playerLvl))
+      {
+        let tempXP = playerXP
+        playerXP = 0;
+        playerLvl++;
+        playerAttack += 1;
+        newlog = `The enemy dies! - You lose ${dmgPlayer} HP and earn ${tempXP} XP - You are now Level ${playerLvl}`
+        if(bossdead)
+          newlog = `The boss dies! - You are now Level ${playerLvl}`
+      }
     }
 
   }
 
-  return {...state, enemyList: arr, player: {...state.player, log: log, life: playerLife}};
+  log.shift(); // Delete first element of the array
+  log.push(newlog);
+
+  return {...state, level: mapLvl, nextLevel: playerNxt, gameMap: copyGM, enemyList: arr,
+    player: {...state.player, xp: playerXP, level: playerLvl, life: playerLife, attack: playerAttack, log: log}};
+
+  //return {...state, enemyList: arr, player: {...state.player, log: log, life: playerLife}};
 }
