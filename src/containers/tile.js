@@ -11,7 +11,9 @@ class Tile extends Component {
 
   render() {
     return(
-      <div className={this.props.className} ></div>
+      <div className={this.props.className} >
+
+      </div>
     )
 
     }

@@ -25,7 +25,8 @@ export default function attackEnemy(state, payload) {
   if(e != undefined)
   {
     let dmgEnemy = playerAttack*5
-    dmgEnemy = random(dmgEnemy, dmgEnemy*2);
+    dmgEnemy = random(dmgEnemy, dmgEnemy*5);
+
     let enemyLife = arr[e].life - dmgEnemy;
 
     let dmgPlayer = mapLvl*3;

@@ -108,7 +108,7 @@ class App extends Component {
       <div className="App container-fluid" tabIndex="0" onKeyDown={this.movePlayer}>
         <div className="row">
 
-              <div className="game-container col-12 col-xl-6"><Game /></div>
+              <div className="game-container col-12 col-xl-6" ><Game /></div>
 
               <div className="col-12 col-xl-6">
               <div className="log-container col-12"><GameLog /></div>

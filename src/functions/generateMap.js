@@ -1,4 +1,4 @@
-const bonusMax = 6;
+const bonusMax = 10;
 const enemyMax = 5;
 const blocks = 60
 
@@ -20,12 +20,14 @@ export default function generateMap(w,h,lvl = 1) {
   gameMap = connectRooms(rooms, gameMap)
 
 
+
   // Print the rooms
   rooms.map((gen) => {
     for(let y = gen.roomStartY; y < gen.roomEndY; y++)
     {
       for(let x = gen.roomStartX; x < gen.roomEndX; x++)
       {
+
         gameMap[y][x] = 0;
       }
     }
@@ -33,9 +35,7 @@ export default function generateMap(w,h,lvl = 1) {
   // Calculate and print the entities
   let mapWithEnemies = createEntities(rooms, gameMap, lvl);
 
-
   return {gameMap: mapWithEnemies.gameMap, enemyList: mapWithEnemies.enemyList};
-
 }
 
 function constructAreas(gameMap) {
@@ -171,22 +171,22 @@ function createEntities(rooms, gameMap, lvl) {
   let enemyList = [];
   let infiniteLoopDebug = 0;
 
-
-  while((bonusCount < 2 || enemyCount < 2) && infiniteLoopDebug < 500)
+  while((bonusCount < 4 || enemyCount < 2) && infiniteLoopDebug < 500)
   {
     for(let j = 0; j < rooms.length; j++) {
       if((random(0,1) === 0) && enemyCount < enemyMax)
       {
-        enemyList.push({key: j, pos: [enemies[j][0],enemies[j][1]], life: 100, type: "enemy"});
+        enemyList.push({key: j, pos: [enemies[j][0],enemies[j][1]], life: 100 + 10*lvl, type: "enemy"});
         gameMap[enemies[j][1]][enemies[j][0]] = 3;
         enemyCount++;
       }
-      if((random(0,3) === 1) && bonusCount < bonusMax)
+      if((random(0,1) === 1) && bonusCount < bonusMax)
       {
         gameMap[bonuses[j][1]][bonuses[j][0]] = 4;
         bonusCount++;
       }
     }
+
   infiniteLoopDebug++
   }
   if(infiniteLoopDebug >= 500)

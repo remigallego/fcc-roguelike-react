@@ -5,6 +5,7 @@
     opacity: 100; } }
 
 .map {
+  background-color: black;
   display: grid;
   width: 600px;
   height: 600px;
@@ -22,27 +23,57 @@
   background-color: #e0e9e5; }
 
 .wall {
-  background-color: #242824; }
+  background-color: #552A04; }
 
 .player {
   background-color: yellow;
   animation-duration: 1s;
   animation-name: blink-kf;
-  animation-iteration-count: infinite; }
+  animation-iteration-count: infinite;
+  height: 100%; }
 
 .enemy {
-  background-color: #c86464; }
+  background-color: #c86464;
+  height: 100%; }
+
+.life {
+  position: absolute;
+  font-size: 7px;
+  opacity: 0.5;
+  margin-top: -19px;
+  margin-left: -1px;
+  z-index: 100;
+  width: 12px;
+  text-align: center; }
+
+.life-boss {
+  color: red;
+  font-weight: bold; }
+
+.life-player {
+  color: green;
+  font-weight: bold; }
 
 .bonus {
   background-color: green; }
 
 .boss {
   background-color: #f00064;
-  border: 1px solid black; }
+  border: 1px solid black;
+  height: 100%; }
 
 .box {
   overflow: hidden;
   border: 1px solid rgba(200, 200, 200, 0.0142857); }
 
 .false {
-  background-color: black; }
+  visibility: hidden; }
+
+.dim1 {
+  opacity: 0.6; }
+
+.dim2 {
+  opacity: 0.8; }
+
+.dim3 {
+  opacity: 0.9; }
