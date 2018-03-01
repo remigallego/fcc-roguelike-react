@@ -19,6 +19,14 @@
   user-select: none;
   -ms-user-select: none; }
 
+.legend-container {
+  margin-top: 40px; }
+
+.legend-center {
+  width: 70px;
+  display: block;
+  margin: 0 auto; }
+
 .empty {
   background-color: #e0e9e5; }
 
@@ -32,9 +40,27 @@
   animation-iteration-count: infinite;
   height: 100%; }
 
+.player-legend {
+  background-color: yellow;
+  animation-duration: 1s;
+  animation-name: blink-kf;
+  animation-iteration-count: infinite;
+  height: 15px;
+  width: 15px;
+  margin-right: 3px; }
+
+.legend-item {
+  display: flex; }
+
 .enemy {
   background-color: #c86464;
   height: 100%; }
+
+.enemy-legend {
+  margin-right: 3px;
+  background-color: #c86464;
+  height: 15px;
+  width: 15px; }
 
 .life {
   position: absolute;
@@ -57,10 +83,23 @@
 .bonus {
   background-color: green; }
 
+.bonus-legend {
+  background-color: green;
+  height: 15px;
+  width: 15px;
+  margin-right: 3px; }
+
 .boss {
   background-color: #f00064;
   border: 1px solid black;
   height: 100%; }
+
+.boss-legend {
+  background-color: #f00064;
+  border: 1px solid black;
+  height: 15px;
+  width: 15px;
+  margin-right: 3px; }
 
 .box {
   overflow: hidden;

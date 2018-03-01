@@ -32,6 +32,19 @@ $blocks: 60
   user-select: none
   -ms-user-select: none
 
+
+
+
+.legend-container
+  margin-top: 40px
+
+
+.legend-center
+  width: 70px
+  display: block
+  margin: 0 auto
+
+
 .empty
   background-color: #e0e9e5
 .wall
@@ -42,9 +55,23 @@ $blocks: 60
   @include blink-anim
   height: 100%
 
+.player-legend
+  background-color: yellow
+  @include blink-anim
+  height: 15px
+  width: 15px
+  margin-right: 3px
+.legend-item
+  display: flex
+
 .enemy
   background-color: rgba(200, 100, 100, 1)
   height: 100%
+.enemy-legend
+  margin-right: 3px
+  background-color: rgba(200, 100, 100, 1)
+  height: 15px
+  width: 15px
 
 .life
   position: absolute
@@ -65,12 +92,21 @@ $blocks: 60
 
 .bonus
   background-color: green
-
+.bonus-legend
+  background-color: green
+  height: 15px
+  width: 15px
+  margin-right: 3px
 .boss
   background-color: rgba(240, 0, 100, 1)
   border: 1px solid black
   height: 100%
-
+.boss-legend
+  background-color: rgba(240, 0, 100, 1)
+  border: 1px solid black
+  height: 15px
+  width: 15px
+  margin-right: 3px
 .box
   overflow: hidden
   border: 1px solid rgba(200, 200, 200, 1/70)
